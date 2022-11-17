@@ -18,11 +18,11 @@ app.use('/wiki', wikiRouter);
 app.use('/user', userRouter);
 
 app.get('/', (req, res, next) => {
-    res.redirect('/wiki');
-})
+  res.redirect('/wiki');
+});
 const PORT = 3000;
 const init = async () => {
-  await db.sync();
+  await db.sync({ froce: true });
   app.listen(PORT, () => {
     console.log(`App listening in port ${PORT}`);
   });
