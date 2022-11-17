@@ -22,7 +22,8 @@ app.get('/', (req, res, next) => {
 });
 const PORT = 3000;
 const init = async () => {
-  await db.sync({ froce: true });
+  await db.sync({ force: true });
+  //   await db.sync();
   app.listen(PORT, () => {
     console.log(`App listening in port ${PORT}`);
   });
