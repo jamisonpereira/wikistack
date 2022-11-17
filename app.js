@@ -15,15 +15,15 @@ db.authenticate().then(() => {
 });
 
 app.use('/wiki', wikiRouter);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 app.get('/', (req, res, next) => {
   res.redirect('/wiki');
 });
 const PORT = 3000;
 const init = async () => {
-  await db.sync({ force: true });
-  //   await db.sync();
+  // await db.sync({ force: true });
+  await db.sync();
   app.listen(PORT, () => {
     console.log(`App listening in port ${PORT}`);
   });

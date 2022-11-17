@@ -28,15 +28,15 @@ router.post('/', async (req, res, next) => {
       status: status,
     });
 
-    // const [user, wasCreated] = await User.findOrCreate({
-    //   where: { name: author },
-    //   defaults: {
-    //     name: author,
-    //     email: email,
-    //   },
-    // });
+    const [user, wasCreated] = await User.findOrCreate({
+      where: { name: author },
+      defaults: {
+        name: author,
+        email: email,
+      },
+    });
 
-    // await page.setAuthor(user);
+    await page.setAuthor(user);
 
     res.redirect(`/wiki/${page.slug}`);
   } catch (err) {
@@ -55,7 +55,8 @@ router.get('/:slug', async (req, res, next) => {
         slug: req.params.slug,
       },
     });
-    const author = page.getAuthor();
+    const author = await page.getAuthor();
+    console.log('AUTHOR: ', author);
     res.send(wikipage(page, author));
   } catch (err) {
     next(err);
